@@ -9,61 +9,57 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenSP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaBan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaGoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaGop)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuongTon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LoaiSanPham.TenLoai)
-        </th>
-        <th></th>
-    </tr>
+<table id="BangSanPham" class="table">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên sản phẩm</th>
+            <th>Loại</th>
+            <th>Giá bán</th>
+            <th>Giá gốc</th>
+            <th>Giá góp</th>
+            <th>Tồn</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaSP</td>
+                <td>@item.TenSP</td>
+                <td>@item.LoaiSanPham.TenLoai</td>
+                <td>
+                    @item.GiaBan
+                </td>
+                <td>
+                    @item.GiaGoc
+                </td>
+                <td>
+                    @item.GiaGop
+                </td>
+                <td>
+                    @item.SoLuongTon
+                </td>
+                <td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaSP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaGoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaGop)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuongTon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+@section scripts {
+   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#BangSanPham').DataTable();
+        });
+    </script>
+      }
